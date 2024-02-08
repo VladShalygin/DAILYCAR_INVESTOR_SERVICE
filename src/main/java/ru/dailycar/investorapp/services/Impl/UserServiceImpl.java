@@ -20,20 +20,19 @@ import ru.dailycar.investorapp.services.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final ModelMapper modelMapper = new ModelMapper();;
+    private final ModelMapper mapper;
     private final UserRepository repository;
     private final JWTService jwtService;
 
     @Override
-    public User getUserById( @NotBlank String id) {
+    public User getUserById( String id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Пользователя с таким id не существует!"));
     }
 
     @Override
-    public User updateUser(UpdateUserDTO updateUserDTO, @NotBlank String id) {
+    public User updateUser(UpdateUserDTO updateUserDTO, String id) {
         User existedUser = repository.findById(id).orElseThrow(() -> new NotFoundException("Пользователя с таким id не существует!"));
-        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-        modelMapper.map(updateUserDTO, existedUser);
+        mapper.map(updateUserDTO, existedUser);
         return repository.save(existedUser);
     }
 

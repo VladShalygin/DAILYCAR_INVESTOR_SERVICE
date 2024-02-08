@@ -23,19 +23,19 @@ public class BankRequisiteController {
 
     private final BankRequisiteService service;
 
-    @GetMapping("/{id}")
+    @GetMapping()
     @CrossOrigin
     @Operation(
             summary = "Банковские реквизиты по id"
     )
-    public ResponseEntity<BankRequisite> getBankRequisiteById(@PathVariable String id) {
+    public ResponseEntity<BankRequisite> getBankRequisiteById(@RequestParam String id) {
         return ResponseEntity.ok(service.getBankRequisiteById(id));
     };
 
-    @GetMapping("/{userId}")
+    @GetMapping("/investor")
     @CrossOrigin
     @Operation(summary = "Получение всех банковских реквизитов пользователя")
-    ResponseEntity<List<BankRequisite>> getBankRequisiteByUserId(@PathVariable String userId) {
+    ResponseEntity<List<BankRequisite>> getBankRequisiteByUserId(@RequestParam String userId) {
         return ResponseEntity.ok(service.getBankRequisiteByUserId(userId));
     }
 

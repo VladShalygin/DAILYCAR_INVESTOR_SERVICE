@@ -2,7 +2,6 @@ package ru.dailycar.investorapp.repositories;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import ru.dailycar.investorapp.entities.User;
 

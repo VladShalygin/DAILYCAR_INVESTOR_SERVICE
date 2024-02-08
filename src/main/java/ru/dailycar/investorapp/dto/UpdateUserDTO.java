@@ -1,9 +1,11 @@
 package ru.dailycar.investorapp.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import org.springframework.lang.Nullable;
 
 @Schema(description = "Сущность для обновления пользователя")
+@Data
 public class UpdateUserDTO {
 
     @Schema(description = "Имя создаваемого пользователя", example = "Вася")

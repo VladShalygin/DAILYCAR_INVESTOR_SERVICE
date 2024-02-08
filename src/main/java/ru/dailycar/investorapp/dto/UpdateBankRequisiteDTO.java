@@ -1,8 +1,10 @@
 package ru.dailycar.investorapp.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import org.springframework.lang.Nullable;
-
+@Data
+@Schema(description = "Схемма для обновления банковский реквизитов")
 public class UpdateBankRequisiteDTO {
 
     @Schema(description = "Для ФЛ: ФИО, для ЮЛ: Наименование организации")

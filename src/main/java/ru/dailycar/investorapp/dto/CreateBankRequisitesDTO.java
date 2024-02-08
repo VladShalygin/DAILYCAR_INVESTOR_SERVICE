@@ -2,8 +2,10 @@ package ru.dailycar.investorapp.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import org.springframework.lang.Nullable;
-
+@Data
+@Schema(description = "Создание банковских реквизитов")
 public class CreateBankRequisitesDTO {
 
     @Schema(description = "Id пользователя")

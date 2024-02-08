@@ -22,7 +22,7 @@ import java.util.List;
 public class BidServiceImpl implements BidService {
 
     private final BidRepository repository;
-    private final ModelMapper modelMapper = new ModelMapper();
+    private final ModelMapper mapper;
 
     @Override
     public List<Bid> getBids() {
@@ -54,8 +54,7 @@ public class BidServiceImpl implements BidService {
     @Override
     public Bid updateBid(UpdateBidDTO updateBidDTO, @Valid @NotBlank String id) {
         Bid existingBid = repository.findById(id).orElseThrow(() -> new NotFoundException("Заявка не найдена"));
-        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-        modelMapper.map(updateBidDTO, existingBid);
+        mapper.map(updateBidDTO, existingBid);
         return repository.save(existingBid);
     }
 

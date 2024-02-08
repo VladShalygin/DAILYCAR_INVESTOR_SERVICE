@@ -20,7 +20,7 @@ public class BankRequisiteServiceImpl implements BankRequisiteService {
 
     private final BankRequisiteRepository repository;
 
-    private final ModelMapper modelMapper = new ModelMapper();
+    private final ModelMapper mapper;
 
     @Override
     public BankRequisite getBankRequisiteById(String id) {
@@ -53,8 +53,7 @@ public class BankRequisiteServiceImpl implements BankRequisiteService {
     @Override
     public BankRequisite updateBankRequisite(UpdateBankRequisiteDTO requisite, String id) {
         BankRequisite existingBankRequisite = repository.findById(id).orElseThrow(() -> new NotFoundException("Реквизиты не найдены"));
-        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-        modelMapper.map(requisite, existingBankRequisite);
+        mapper.map(requisite, existingBankRequisite);
         return repository.save(existingBankRequisite);
     }
 }

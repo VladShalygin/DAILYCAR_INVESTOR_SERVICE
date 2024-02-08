@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class TransactionServiceImpl  implements TransactionService {
 
-    private final ModelMapper modelMapper = new ModelMapper();
+    private final ModelMapper mapper;
     private final TransactionRepository repository;
 
     @Override
@@ -48,9 +48,7 @@ public class TransactionServiceImpl  implements TransactionService {
     @Override
     public Transaction updateTransaction(UpdateTransactionDTO updateTransactionDTO, @Valid @NotBlank String id) {
         Transaction existedTransaction = repository.findById(id).orElseThrow(() -> new NotFoundException("Данная транзацкция не существует"));
-
-        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-        modelMapper.map(updateTransactionDTO, existedTransaction);
+        mapper.map(updateTransactionDTO, existedTransaction);
         return repository.save(existedTransaction);
     }
 }

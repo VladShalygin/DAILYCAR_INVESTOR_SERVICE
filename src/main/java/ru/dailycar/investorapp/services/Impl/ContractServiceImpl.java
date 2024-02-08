@@ -22,7 +22,7 @@ public class ContractServiceImpl implements ContractService {
 
     private final ContractRepository repository;
 
-    private final ModelMapper modelMapper = new ModelMapper();
+    private final ModelMapper mapper;
 
     @Override
     public List<Contract> getContracts() {
@@ -58,8 +58,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Contract updateContract(UpdateContractDTO updateContractDTO, @Valid @NotBlank String id) {
         Contract existingContract = repository.findById(id).orElseThrow(() -> new  NotFoundException("Договора с таким айди не существует!"));
-        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
-        modelMapper.map(updateContractDTO, existingContract);
+        mapper.map(updateContractDTO, existingContract);
         return repository.save(existingContract);
     }
 }

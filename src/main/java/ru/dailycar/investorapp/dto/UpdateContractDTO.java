@@ -1,10 +1,12 @@
 package ru.dailycar.investorapp.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import org.springframework.lang.Nullable;
 import ru.dailycar.investorapp.entities.ContractStatus;
 
 @Schema(description = "Сущность для обновления")
+@Data
 public class UpdateContractDTO {
 
     @Schema(description = "Статус договора", example = "EXPIRATION")
