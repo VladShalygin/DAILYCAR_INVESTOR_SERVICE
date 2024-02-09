@@ -6,4 +6,5 @@ public interface AuthCodeService {
 
     Boolean checkCode();
 
+    Integer generateCode();
 }

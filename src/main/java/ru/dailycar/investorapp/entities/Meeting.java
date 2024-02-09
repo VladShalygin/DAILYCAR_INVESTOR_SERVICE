@@ -14,6 +14,7 @@ import org.springframework.lang.Nullable;
 public class Meeting {
 
     @Id
+    @Schema(description = "ID встречи")
     private String id;
 
     @Schema(description = "ID пользователя, приглашенного на встречу")

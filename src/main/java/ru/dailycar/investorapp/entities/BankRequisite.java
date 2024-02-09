@@ -11,6 +11,7 @@ import org.springframework.lang.Nullable;
 public class BankRequisite {
 
     @Id
+    @Schema(description = "Id реквизитов")
     private String id;
 
     @Schema(description = "Id юзера")

@@ -15,4 +15,10 @@ public interface DocumentPhotoService {
 
     public DocumentPhoto uploadDocumentsPhoto(MultipartFile file, String userId);
 
+    public DocumentPhoto updateDocumentsPhoto(MultipartFile file, String id);
+
+    public DocumentPhoto denyDocumentPhoto(String id);
+
+    public DocumentPhoto acceptDocumentPhoto(String id);
+
 }

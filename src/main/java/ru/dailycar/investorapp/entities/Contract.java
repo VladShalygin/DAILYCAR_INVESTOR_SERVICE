@@ -40,4 +40,10 @@ public class Contract {
     @Schema(description = "Процентная ставка по договору", example = "20")
     private Integer percent;
 
+    @Schema(description = "Id процентных ставок по договору агента")
+    private String agentPercentageId;
+
+    @Schema(description = "Путь до электронного договора")
+    private String path;
+
 }

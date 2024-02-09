@@ -1,8 +1,11 @@
 package ru.dailycar.investorapp.entities;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.lang.Nullable;
 
 public class Notification {
+
+    @Id
     private String id;
 
     private String message;

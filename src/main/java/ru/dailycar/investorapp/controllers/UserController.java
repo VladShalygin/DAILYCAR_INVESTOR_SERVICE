@@ -29,12 +29,6 @@ public class UserController {
         return ResponseEntity.ok(service.getUserById(id));
     }
 
-//    @PostMapping
-//    @Operation(summary = "Создание пользователя")
-//    public ResponseEntity<User> createUser(@RequestBody @Parameter(description = "Объект для создания пользователя") SignUpRequest createUserDTO) {
-//        return ResponseEntity.ok(service.createUser(createUserDTO));
-//    }
-
     @CrossOrigin
     @PutMapping("/{id}")
     @SecurityRequirement(name = "JWT")

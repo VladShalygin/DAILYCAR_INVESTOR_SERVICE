@@ -1,10 +1,13 @@
 package ru.dailycar.investorapp.services.Impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import ru.dailycar.investorapp.services.RedisService;
 
 @Service
-public class RedisService {
+@RequiredArgsConstructor
+public class RedisServiceImpl implements RedisService {
 
     private RedisTemplate<String, String> redisTemplate;
 

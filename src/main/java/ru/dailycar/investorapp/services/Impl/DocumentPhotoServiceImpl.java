@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.dailycar.investorapp.entities.DocumentPhoto;
+import ru.dailycar.investorapp.entities.DocumentPhotoStatus;
 import ru.dailycar.investorapp.exceptions.NotFoundException;
 import ru.dailycar.investorapp.repositories.DocumentPhotoRepository;
 import ru.dailycar.investorapp.services.DocumentPhotoService;
@@ -56,6 +57,7 @@ public class DocumentPhotoServiceImpl implements DocumentPhotoService {
                     .userId(userId)
                     .path("/docs/" + filename)
                     .dateUpload(System.currentTimeMillis())
+                    .status(DocumentPhotoStatus.NEW)
                     .build();
 
             return repository.save(photo);
@@ -64,6 +66,39 @@ public class DocumentPhotoServiceImpl implements DocumentPhotoService {
         } catch (IOException e) {
             throw new RuntimeException("Ошибка сохранения файла: " + file.getOriginalFilename(), e);
         }
+    }
+
+    @Override
+    public DocumentPhoto updateDocumentsPhoto(MultipartFile file, String id) {
+
+        try {
+            DocumentPhoto existedPhoto = getDocumentPhotoById(id);
+
+            String filename = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+            Path filepath = Paths.get(UPLOAD_DIR, filename);
+            Files.createDirectories(filepath.getParent());
+            Files.write(filepath, file.getBytes());
+
+            existedPhoto.setStatus(DocumentPhotoStatus.NEW);
+            existedPhoto.setPath("/docs/" + filename);
+
+            return repository.save(existedPhoto);
+        } catch (IOException e) {
+            throw new RuntimeException("Ошибка сохранения файла: " + file.getOriginalFilename(), e);
+        }
+    }
+
+    @Override
+    public DocumentPhoto denyDocumentPhoto(String id) {
+        DocumentPhoto existedPhoto = getDocumentPhotoById(id);
+        existedPhoto.setStatus(DocumentPhotoStatus.DENYIED);
+        return repository.save(existedPhoto);
+    }
+    @Override
+    public DocumentPhoto acceptDocumentPhoto(String id) {
+        DocumentPhoto existedPhoto = getDocumentPhotoById(id);
+        existedPhoto.setStatus(DocumentPhotoStatus.ACCEPTED);
+        return repository.save(existedPhoto);
     }
 
 }

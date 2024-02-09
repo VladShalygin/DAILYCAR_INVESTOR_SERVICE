@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.dailycar.investorapp.services.AuthCodeService;
+import ru.dailycar.investorapp.services.RedisService;
+
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +35,11 @@ public class AuthCodeServiceImpl implements AuthCodeService {
     @Override
     public Boolean checkCode() {
         return null;
+    }
+
+    @Override
+    public Integer generateCode() {
+        Random random = new Random();
+        return random.nextInt(9000) + 1000;
     }
 }

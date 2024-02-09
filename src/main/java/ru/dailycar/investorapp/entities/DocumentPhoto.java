@@ -22,6 +22,9 @@ public class DocumentPhoto {
     @Schema(description = "Путь до файла", example = "/home/autocars...")
     private String path;
 
+    @Schema(description = "Статус фото")
+    private DocumentPhotoStatus status;
+
     @Schema(description = "Дата загрузки", example = "1705129595000")
     private Long dateUpload;
 

@@ -38,7 +38,7 @@ public class MeetingsController {
     @GetMapping("/investor/{id}")
     @Operation(summary = "Получение встреч c пользователем по его Id")
     @SecurityRequirement(name = "JWT")
-    public ResponseEntity<List<Meeting>> getMeetingByUserId(@PathVariable @Validated @Parameter(description = "Id пользователя") @NotBlank String id) {
+    public ResponseEntity<List<Meeting>> getMeetingByUserId(@PathVariable @Validated @Parameter(description = "Id встречи") @NotBlank String id) {
         return ResponseEntity.ok(service.getUserMeeting(id));
     }
 
