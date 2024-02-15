@@ -20,15 +20,19 @@ public class NotificationSourceImpl implements NotificationSource {
     private String url;
 
     @Override
-    public void sendNotification(SendNotificationRequest request) {
+    public String sendNotification(SendNotificationRequest request) {
         try {
-            ResponseEntity<Notification> result =  RestClient.create().get()
-                    .uri(url)
+            ResponseEntity<Notification> result =  RestClient.create().post()
+                    .uri(url + "/send")
+                    .body(request)
                     .retrieve()
                     .toEntity(Notification.class);
 
-            if (result.getStatusCode() == HttpStatus.OK) {
+            System.out.println(result.toString());
+            if (result.getStatusCode() != HttpStatus.OK) {
                 throw  new NotificationSendingError("Сервис отправки уведомлений ответил ошибкой!");
+            } else {
+                return "Сообщение отправлено!";
             }
 
         } catch (Exception e) {

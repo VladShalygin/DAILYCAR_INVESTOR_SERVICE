@@ -1,6 +1,7 @@
 package ru.dailycar.investorapp.exceptions;
 
 import jakarta.validation.ConstraintViolationException;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -59,6 +60,21 @@ public class ErrorHandlingControllerAdvice {
         }
 
         return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public String handleHttpClientErrorException(NotFoundException e) {
+
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handleHttpClientErrorException(BadRequestException e) {
+        return e.getMessage();
     }
 
 }

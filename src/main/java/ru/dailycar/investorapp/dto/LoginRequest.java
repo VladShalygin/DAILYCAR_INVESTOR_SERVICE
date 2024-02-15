@@ -11,4 +11,9 @@ public class LoginRequest {
 
     @NotBlank(message = "Пароль является обязательным полем")
     private String password;
+
+    @NotBlank(message = "Код является обязательным полем")
+    private String code;
+
+
 }

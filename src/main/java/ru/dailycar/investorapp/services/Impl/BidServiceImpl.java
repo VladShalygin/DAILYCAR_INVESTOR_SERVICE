@@ -3,7 +3,6 @@ package ru.dailycar.investorapp.services.Impl;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ru.dailycar.investorapp.dto.CreateBidDTO;

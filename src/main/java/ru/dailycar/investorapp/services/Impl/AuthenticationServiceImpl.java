@@ -43,7 +43,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         boolean existedUserByEmail = repository.existsByEmail(request.getEmail());
 
         if (existedUserByEmail || existedUserByPhone) throw new UserAlreadyExists();
-        System.out.println(request);
         return repository.save(User.builder()
                 .name(request.getName())
                 .secondName(request.getSecondName())
@@ -64,7 +63,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public LoginResponse login(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        User user = repository.findByEmailOrPhoneNumber(request.getUsername()).orElseThrow(IllegalArgumentException::new);
+        User user = repository.findByEmailOrPhoneNumber(request.getUsername()).orElseThrow(() -> new NotFoundException("Пользователь не найден!"));
         return LoginResponse.builder()
                 .token(jwtService.generateToken(user))
                 .refreshToken(jwtService.generateRefreshToken(new HashMap<>(), user))
@@ -76,7 +75,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public LoginResponse refreshToken(RefreshTokenRequest request) {
         String username = jwtService.extractUserName(request.getToken());
         User user = repository.findByEmailOrPhoneNumber(username).orElseThrow(() -> new NotFoundException("Пользователь не найден!"));
-        System.out.println(user);
         if (jwtService.isTokenValid(request.getToken(), user)) {
             return LoginResponse.builder()
                     .token(jwtService.generateToken(user))
@@ -86,11 +84,29 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return null;
     }
 
+    @Override
+    public User changePassword(String username, String newPassword) {
+        User user = repository.findByEmailOrPhoneNumber(username).orElseThrow(() -> new NotFoundException("Пользователь не найден!"));
+        user.setPassword(passwordEncoder.encode(newPassword));
+        return repository.save(user);
+
+    }
+
+    @Override
+    public User changeUsername(String oldUsername, String newUsername) {
+        User user = repository.findByEmailOrPhoneNumber(oldUsername).orElseThrow(() -> new NotFoundException("Пользователь не найден!"));
+        if (oldUsername.contains("@") && newUsername.contains("@")) {
+            user.setEmail(newUsername);
+        } else {
+            user.setPhoneNumber(normalizePhoneNumber(newUsername));
+        }
+        return repository.save(user);
+    }
+
 
     private String normalizePhoneNumber(String phoneNumber) {
         return phoneNumber
                 .replaceAll("\\+7", "8")
-//                .replaceAll("7", "8")
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "")
                 .replaceAll(" ", "")

@@ -14,4 +14,8 @@ public interface AuthenticationService {
 
     LoginResponse refreshToken(RefreshTokenRequest request);
 
+    User changePassword(String username, String newPassword);
+
+    User changeUsername(String oldUsername, String newUsername);
+
 }

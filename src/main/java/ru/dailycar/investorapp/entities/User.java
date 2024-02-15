@@ -93,7 +93,5 @@ public class User implements CustomUserDetails {
         return phoneNumber;
     }
 
-    //todo добавить банковские реквизиты в юзера
-    //todo добавить паспортные данные в юзера
 
 }

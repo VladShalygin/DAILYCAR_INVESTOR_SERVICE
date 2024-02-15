@@ -38,12 +38,20 @@ public class SignUpRequest {
     private String parentReferralCode;
 
     @Schema(description = "Пароль пользователя")
-    @NotBlank
+    @NotBlank(message = "password не должен быть null")
     private String password;
 
     @Schema(description = "Юридическое/Физическое лицо")
-    @NotBlank
+    @NotBlank(message = "type не должен быть null")
     private String type;
+
+    @Schema(description = "Код подтверждения почты")
+    @NotBlank(message = "emailCode не должен быть null")
+    private String emailCode;
+
+    @Schema(description = "Код подтверждения телефон")
+    @NotBlank(message = "phoneCode не должен быть null")
+    private String phoneCode;
 
 //    @Schema(description = "Пол инвестора")
 //    @NotBlank

@@ -5,6 +5,6 @@ import ru.dailycar.investorapp.dto.SendNotificationRequest;
 
 public interface NotificationSource {
 
-    void sendNotification(SendNotificationRequest request);
+    String sendNotification(SendNotificationRequest request);
 
 }
