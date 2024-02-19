@@ -8,7 +8,7 @@ import ru.dailycar.investorapp.entities.User;
 
 public interface AuthenticationService {
 
-    User signUp(SignUpRequest request);
+    LoginResponse signUp(SignUpRequest request);
 
     LoginResponse login(LoginRequest request);
 

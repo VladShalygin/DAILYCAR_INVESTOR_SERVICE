@@ -50,10 +50,8 @@ public class PercentServiceImpl implements PercentService {
         return repository.save(
                 Percent
                         .builder()
-                        .calculatedPercentId(!StringUtils.isBlank(percent.getCalculatedPercentId()) ? percent.getCalculatedPercentId() : "empty")
                         .amount(percent.getAmount())
                         .contractId(percent.getContractId())
-                        .status(PercentStatus.valueOf(percent.getStatus()))
                         .type(PercentType.valueOf(percent.getType()))
                         .timestamp(System.currentTimeMillis())
                         .build()

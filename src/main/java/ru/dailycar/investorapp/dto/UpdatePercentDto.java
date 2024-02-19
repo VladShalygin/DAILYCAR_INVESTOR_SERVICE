@@ -21,7 +21,7 @@ public class UpdatePercentDto {
 
     @Nullable
     @Schema(description = "Сумма процента")
-    private Integer amount;
+    private Double amount;
 
     @Nullable
     @Schema(description = "Дата создания этого процента")

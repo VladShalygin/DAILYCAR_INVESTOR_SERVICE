@@ -21,6 +21,8 @@ import ru.dailycar.investorapp.entities.User;
 import ru.dailycar.investorapp.services.AuthCodeService;
 import ru.dailycar.investorapp.services.AuthenticationService;
 
+import java.util.concurrent.TimeoutException;
+
 @Controller
 @RequiredArgsConstructor
 @Validated
@@ -37,7 +39,7 @@ public class AuthenticationController {
     @Operation(
             summary = "Регистрация пользователя"
     )
-    public ResponseEntity<User> signup(@Valid @RequestBody SignUpRequest request) throws BadRequestException {
+    public ResponseEntity<LoginResponse> signup(@Valid @RequestBody SignUpRequest request) throws BadRequestException {
         if (!codeService.checkCode(request.getEmail(), request.getEmailCode(), CodeType.SIGNUP) && !codeService.checkCode(request.getPhoneNumber(), request.getPhoneCode(), CodeType.SIGNUP)) {
             throw new BadRequestException("Не верный код!");
         }
@@ -72,7 +74,7 @@ public class AuthenticationController {
             summary = "Создание кода для подтверждения пользователя!"
     )
     public ResponseEntity<String> createCode(@Valid @NotBlank @RequestParam String username,
-                                             @NotBlank @RequestParam String type) {
+                                             @NotBlank @RequestParam String type) throws TimeoutException {
         return ResponseEntity.ok(codeService.createCode(username, CodeType.valueOf(type)));
     }
 

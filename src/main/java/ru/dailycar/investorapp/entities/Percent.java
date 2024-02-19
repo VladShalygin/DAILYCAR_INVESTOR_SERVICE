@@ -23,24 +23,21 @@ public class Percent {
     @Schema(description = "Тип платежа")
     private PercentType type;
 
-    @NotNull
-    @Schema(description = "Статус - оплачен/создан")
-    private PercentStatus status;
-
     @Positive
     @Schema(description = "Сумма процента")
-    private Integer amount;
+    private Double amount;
 
     @Positive
     @Schema(description = "Дата создания этого процента")
     private Long timestamp;
 
+    @Positive
+    @Schema(description = "Дата создания этого процента")
+    private Integer number;
+
     @NotBlank
     @Schema(description = "Id договора, к котому относится данный процент")
     private String contractId;
 
-    @Nullable
-    @Schema(description = "Привязка к расчитанному проценту у выплаченного платежа")
-    private String calculatedPercentId;
 
 }

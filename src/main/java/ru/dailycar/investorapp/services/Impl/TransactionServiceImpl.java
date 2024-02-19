@@ -17,19 +17,24 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class TransactionServiceImpl  implements TransactionService {
+public class TransactionServiceImpl implements TransactionService {
 
     private final ModelMapper mapper;
     private final TransactionRepository repository;
 
     @Override
-    public Transaction getTransactionById(@Valid @NotBlank String id) {
+    public Transaction getTransactionById(String id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Данная транзацкция не существует!"));
     }
 
     @Override
-    public List<Transaction> getTransactionsByUserId(@Valid @NotBlank String userId) {
+    public List<Transaction> getTransactionsByUserId(String userId) {
         return repository.findByUserId(userId);
+    }
+
+    @Override
+    public List<Transaction> getInvestmentsByContractId(String contractId) {
+        return repository.findContractInvestments(contractId);
     }
 
     @Override
@@ -50,4 +55,10 @@ public class TransactionServiceImpl  implements TransactionService {
         mapper.map(updateTransactionDTO, existedTransaction);
         return repository.save(existedTransaction);
     }
+
+    @Override //todo дописать метод
+    public List<Transaction> getInvestmentsBeforeDate(String contractId, Long dateEnd) {
+        return null;
+    }
+
 }

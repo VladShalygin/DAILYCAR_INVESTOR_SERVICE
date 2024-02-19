@@ -21,7 +21,7 @@ public class CreatePercentDto {
 
     @Positive
     @Schema(description = "Сумма процента")
-    private Integer amount;
+    private Double amount;
 
     @NotBlank
     @Schema(description = "Id договора, к котому относится данный процент")

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -44,6 +45,14 @@ public class ErrorHandlingControllerAdvice {
                 .map(error -> new Violation(error.getField(), error.getDefaultMessage()))
                 .collect(Collectors.toList());
         return new ValidationErrorResponse(violations);
+    }
+    @ExceptionHandler(TimeoutException.class)
+    @ResponseStatus(HttpStatus.REQUEST_TIMEOUT)
+    @ResponseBody
+    public BasicErrorResponse onMethodArgumentNotValidException(
+            TimeoutException e
+    ) {
+        return new BasicErrorResponse(e.getMessage());
     }
 
     @ExceptionHandler(UserAlreadyExists.class)

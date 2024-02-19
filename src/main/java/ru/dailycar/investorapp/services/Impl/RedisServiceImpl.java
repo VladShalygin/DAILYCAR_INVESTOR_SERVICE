@@ -6,14 +6,20 @@ import org.springframework.stereotype.Service;
 import ru.dailycar.investorapp.exceptions.NotFoundException;
 import ru.dailycar.investorapp.services.RedisService;
 
+import java.util.concurrent.TimeoutException;
+
 @Service
 @RequiredArgsConstructor
 public class RedisServiceImpl implements RedisService {
 
     private final RedisTemplate<String, String> redisTemplate;
 
-    public void set(String key, String value) {
-        redisTemplate.opsForValue().set(key, value);
+    public void set(String key, String value) throws TimeoutException {
+        try {
+            redisTemplate.opsForValue().set(key, value);
+        } catch (Exception e) {
+            throw new TimeoutException("Не удалось сохранить сообщение");
+        }
     }
 
     public String get(String key) {

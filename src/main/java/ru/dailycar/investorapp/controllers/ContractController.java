@@ -17,6 +17,7 @@ import ru.dailycar.investorapp.dto.UpdateContractDTO;
 import ru.dailycar.investorapp.entities.Contract;
 import ru.dailycar.investorapp.entities.DocumentPhoto;
 import ru.dailycar.investorapp.services.ContractService;
+import ru.dailycar.investorapp.services.PercentCounterService;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.List;
 public class ContractController {
 
     private final ContractService service;
+    private final PercentCounterService percentCounterService;
 
     @GetMapping()
     @SecurityRequirement(name = "JWT")
@@ -87,6 +89,15 @@ public class ContractController {
         headers.setContentDispositionFormData("attachment", filename);
 
         return ResponseEntity.ok().headers(headers).body(resource);
+    }
+
+//todo удалить тестовый запрос
+    @GetMapping("/test/{contractId}")
+    @SecurityRequirement(name = "JWT")
+    @Operation(summary = "Получение всех договоров инвестора")
+    public ResponseEntity<String> testCount(@PathVariable @Parameter(description = "ID contract") String contractId) {
+        percentCounterService.countBasicContract(contractId);
+        return ResponseEntity.ok("OK");
     }
 
 }

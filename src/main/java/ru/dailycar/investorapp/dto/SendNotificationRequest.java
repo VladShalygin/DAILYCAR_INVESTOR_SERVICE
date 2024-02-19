@@ -32,9 +32,12 @@ public class SendNotificationRequest {
                 .creatorId("system")
                 .destinationId(id)
                 .destinationContact(username)
-                .message("Ваш код для кабинета инвестора - " + code.toString())
+                .message("Добрый день! \n\n" +
+                        "Ваш код подтверждения для кабинета инвестора DailyCar: " + code.toString() + "\n" +
+                        "Если действие осуществляли не вы, то свяжитесь с нами по номеру +7 (843) 5-285-285.\n\n" +
+                        "Хорошего вам дня!")
                 .Subject("Подтвержение в кабинете инвестора")
-                .type(username.contains("@") ? "MAIL" : "SMS")
+                .type(username.contains("@") || username.contains("%40") ? "MAIL" : "SMS")
                 .build();
     }
 }

@@ -12,7 +12,11 @@ public interface TransactionService {
 
     public List<Transaction> getTransactionsByUserId(String userId);
 
+    List<Transaction> getInvestmentsByContractId(String contractId);
+
     public Transaction createTransaction(CreateTransactionDTO createTransactionDTO);
 
     public Transaction updateTransaction(UpdateTransactionDTO createTransactionDTO, String id);
+
+    public List<Transaction> getInvestmentsBeforeDate(String contractId, Long dateEnd);
 }

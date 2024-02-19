@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import ru.dailycar.investorapp.dto.AgentInvitedUsers;
 import ru.dailycar.investorapp.dto.UpdateUserDTO;
 import ru.dailycar.investorapp.entities.CustomUserDetails;
 import ru.dailycar.investorapp.entities.User;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private final JWTService jwtService;
 
     @Override
-    public User getUserById( String id) {
+    public User getUserById(String id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Пользователя с таким id не существует!"));
     }
 
@@ -48,5 +49,14 @@ public class UserServiceImpl implements UserService {
     public User getUserByToken(String token) {
         String username = jwtService.extractUserName(token);
         return repository.findByEmailOrPhoneNumber(username).orElseThrow(() -> new NotFoundException("Пользователь не найден!"));
+    }
+
+    @Override
+    public AgentInvitedUsers getUserInvitedPeoples(String referralCode) {
+        return
+                AgentInvitedUsers
+                        .builder()
+                        .usersFirstLevel(repository.findUsersByParentReferralCode(referralCode))
+                        .build();
     }
 }
