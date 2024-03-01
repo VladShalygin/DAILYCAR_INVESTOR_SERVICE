@@ -20,12 +20,16 @@ public class UpdateUserDTO {
     @Nullable
     private String surname;
 
-    @Schema(description = "Номер телефона пользователя", example = "89994446677")
+    @Schema(description = "Пол инвестора", example = "MALE")
     @Nullable
-    private String phoneNumber;
+    private String gender;
 
-    @Schema(description = "Электронная почта пользователя", example = "example@test.com")
+    @Schema(description = "Дата рождения инвестора", example = "1708519434096")
     @Nullable
-    private String email;
+    private Long birthday;
+
+    @Schema(description = "Тип лица", example = "LEGAL")
+    @Nullable
+    private String type;
 
 }

@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.dailycar.investorapp.dto.CreateContractDTO;
 import ru.dailycar.investorapp.dto.UpdateContractDTO;
 import ru.dailycar.investorapp.entities.Contract;
-import ru.dailycar.investorapp.entities.DocumentPhoto;
 import ru.dailycar.investorapp.services.ContractService;
 import ru.dailycar.investorapp.services.PercentCounterService;
 
@@ -96,8 +95,9 @@ public class ContractController {
     @SecurityRequirement(name = "JWT")
     @Operation(summary = "Получение всех договоров инвестора")
     public ResponseEntity<String> testCount(@PathVariable @Parameter(description = "ID contract") String contractId) {
-        percentCounterService.countBasicContract(contractId);
-        return ResponseEntity.ok("OK");
+//        percentCounterService.countBasicContract(contractId);
+        percentCounterService.countPercent(contractId);
+        return ResponseEntity.ok("ok");
     }
 
 }

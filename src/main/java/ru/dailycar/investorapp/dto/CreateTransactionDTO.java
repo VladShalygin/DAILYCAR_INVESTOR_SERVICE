@@ -26,4 +26,10 @@ public class CreateTransactionDTO {
     @Schema(description = "Тип инвестиции", example = "INVESTMENT")
     @NotNull(message = "type не должен быть null")
     private TransactionType type;
+
+    @Schema(description = "Id процента", example = "64804f7ab3afb023c6b9d54645")
+    @NotNull(message = "percentId не должен быть null")
+    private String percentId;
+
+
 }

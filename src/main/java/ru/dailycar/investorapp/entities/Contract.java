@@ -46,4 +46,7 @@ public class Contract {
     @Schema(description = "Путь до электронного договора")
     private String path;
 
+    @Schema(description = "Id договора агента")
+    private String parentContractId;
+
 }

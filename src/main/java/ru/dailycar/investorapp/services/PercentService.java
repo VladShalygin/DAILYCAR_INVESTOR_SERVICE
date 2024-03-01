@@ -16,6 +16,7 @@ public interface PercentService {
 
     public Percent updatePercent(UpdatePercentDto percent, String id);
 
-    public Percent createPercent(CreatePercentDto percent, String id);
+    public Percent createPercent(CreatePercentDto percent);
 
+    Percent getPercentForCalculate(int number, String contractId);
 }

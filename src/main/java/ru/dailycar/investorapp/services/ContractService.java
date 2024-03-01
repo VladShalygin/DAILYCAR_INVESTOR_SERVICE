@@ -21,4 +21,7 @@ public interface ContractService {
     public Contract updateContract(UpdateContractDTO updateContractDTO, String id);
 
     public Contract uploadContract(MultipartFile file, String id) throws IOException;
+
+    public List<Contract> getActiveContracts();
+
 }

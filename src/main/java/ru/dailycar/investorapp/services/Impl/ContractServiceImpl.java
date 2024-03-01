@@ -60,6 +60,7 @@ public class ContractServiceImpl implements ContractService {
                 .amount(createContractDTO.getAmount())
                 .percent(createContractDTO.getPercent())
                 .agentPercentageId(createContractDTO.getAgentPercentageId())
+                .parentContractId(createContractDTO.getAgentContractId())
                 .build());
     }
 
@@ -84,4 +85,10 @@ public class ContractServiceImpl implements ContractService {
         return repository.save(existedContract);
 
     }
+
+    @Override
+    public List<Contract> getActiveContracts() {
+        return repository.findActiveContracts();
+    }
+
 }

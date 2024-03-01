@@ -16,10 +16,6 @@ public class UpdatePercentDto {
     private PercentType type;
 
     @Nullable
-    @Schema(description = "Статус - оплачен/создан")
-    private PercentStatus status;
-
-    @Nullable
     @Schema(description = "Сумма процента")
     private Double amount;
 
@@ -30,9 +26,5 @@ public class UpdatePercentDto {
     @Nullable
     @Schema(description = "Id договора, к котому относится данный процент")
     private String contractId;
-
-    @Nullable
-    @Schema(description = "Привязка к расчитанному проценту у выплаченного платежа")
-    private String calculatedPercentId;
 
 }

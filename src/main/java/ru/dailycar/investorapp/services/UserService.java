@@ -17,5 +17,4 @@ public interface UserService {
 
     User getUserByToken(String token);
 
-    AgentInvitedUsers getUserInvitedPeoples(String referralCode);
 }

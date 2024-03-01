@@ -34,4 +34,7 @@ public class Transaction {
     @Schema(description = "Статус транзакции", example = "CREATED")
     private TransactionStatus status;
 
+    @Schema(description = "Id процента, привязанного к этому платежу", example = "64804f7ab3afb023c6b9d3123")
+    private String percentId;
+
 }

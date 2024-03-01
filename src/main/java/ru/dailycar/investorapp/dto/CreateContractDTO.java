@@ -36,4 +36,8 @@ public class CreateContractDTO {
     @Nullable
     private String agentPercentageId;
 
+    @Schema(description = "Id договора агента")
+    @Nullable
+    private String agentContractId;
+
 }

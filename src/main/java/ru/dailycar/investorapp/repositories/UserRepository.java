@@ -17,7 +17,4 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     boolean existsByEmail(String email);
 
-    boolean existsByReferralCode(String referralCode);
-
-    List<User> findUsersByParentReferralCode(String referralCode);
 }

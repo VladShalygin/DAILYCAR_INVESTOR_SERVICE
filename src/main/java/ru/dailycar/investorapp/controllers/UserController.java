@@ -49,11 +49,4 @@ public class UserController {
         return ResponseEntity.ok(service.getUserByToken(token));
     }
 
-    @CrossOrigin
-    @GetMapping("/referral")
-    @SecurityRequirement(name = "JWT")
-    @Operation(summary = "Получение приглашенных пользователем(1 уровень)")
-    public ResponseEntity<AgentInvitedUsers> getUserInvitedPeoples(@Valid @RequestParam @Parameter(description = "Реферальный код пользователя") @NotBlank String referralCode) {
-        return ResponseEntity.ok(service.getUserInvitedPeoples(referralCode));
-    }
 }

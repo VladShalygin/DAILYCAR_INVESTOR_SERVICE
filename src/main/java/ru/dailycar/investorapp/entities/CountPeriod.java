@@ -10,7 +10,6 @@ public class CountPeriod {
     private Long dateStart;
     private Long dateEnd;
     private Integer percent;
-    private Integer daysInYear;
-    private Integer daysInMonth;
-    private Integer number;
+    private Long daysInYear;
+    private Long daysInMonth;
 }

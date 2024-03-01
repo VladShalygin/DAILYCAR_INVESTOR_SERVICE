@@ -51,12 +51,4 @@ public class UserServiceImpl implements UserService {
         return repository.findByEmailOrPhoneNumber(username).orElseThrow(() -> new NotFoundException("Пользователь не найден!"));
     }
 
-    @Override
-    public AgentInvitedUsers getUserInvitedPeoples(String referralCode) {
-        return
-                AgentInvitedUsers
-                        .builder()
-                        .usersFirstLevel(repository.findUsersByParentReferralCode(referralCode))
-                        .build();
-    }
 }

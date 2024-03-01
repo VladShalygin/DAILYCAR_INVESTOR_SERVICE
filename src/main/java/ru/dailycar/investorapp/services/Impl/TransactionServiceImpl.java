@@ -39,14 +39,16 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction createTransaction(@Valid CreateTransactionDTO createTransactionDTO) {
-        return repository.save(Transaction.builder()
-                .userId(createTransactionDTO.getUserId())
-                .amount(createTransactionDTO.getAmount())
-                .contractId(createTransactionDTO.getContractId())
-                .date(System.currentTimeMillis())
-                .status(TransactionStatus.CREATED)
-                .type(createTransactionDTO.getType())
-                .build());
+        return repository.save(
+                Transaction.builder()
+                        .userId(createTransactionDTO.getUserId())
+                        .amount(createTransactionDTO.getAmount())
+                        .contractId(createTransactionDTO.getContractId())
+                        .date(System.currentTimeMillis())
+                        .status(TransactionStatus.CREATED)
+                        .type(createTransactionDTO.getType())
+                        .percentId(createTransactionDTO.getPercentId())
+                        .build());
     }
 
     @Override
@@ -56,9 +58,10 @@ public class TransactionServiceImpl implements TransactionService {
         return repository.save(existedTransaction);
     }
 
-    @Override //todo дописать метод
+    @Override
     public List<Transaction> getInvestmentsBeforeDate(String contractId, Long dateEnd) {
-        return null;
+        return repository.findInvestmentsBeforeDate(contractId, dateEnd);
     }
+
 
 }

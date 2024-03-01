@@ -43,12 +43,6 @@ public class User implements CustomUserDetails {
     @Schema(description = "Электронная почта пользователя", example = "example@test.com")
     private String email;
 
-    @Schema(description = "Реферальный код данного инвестора", example = "DSC2132FFa23")
-    private String referralCode;
-
-    @Schema(description = "Реферальный код инвестора, который пригласил данного пользователя", example = "DSC2132FFa23")
-    private String parentReferralCode;
-
     @Schema(description = "Пароль пользователя")
     private String password;
 
@@ -57,6 +51,9 @@ public class User implements CustomUserDetails {
 
     @Schema(description = "Пол инвестора")
     private GenderType gender;
+
+    @Schema(description = "Дата рождения")
+    private Long birthday;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

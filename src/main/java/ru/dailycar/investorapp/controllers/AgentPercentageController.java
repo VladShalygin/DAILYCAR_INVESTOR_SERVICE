@@ -2,6 +2,7 @@ package ru.dailycar.investorapp.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -29,6 +30,7 @@ public class AgentPercentageController {
 
     @GetMapping("/{id}")
     @CrossOrigin
+    @SecurityRequirement(name = "JWT")
     @Operation(summary = "Агентские проценты по id")
     public ResponseEntity<AgentPercentage> getPercentageById(@PathVariable @Parameter(description = "Id процента") String id) {
         return ResponseEntity.ok(service.getPercentageById(id));
@@ -36,6 +38,7 @@ public class AgentPercentageController {
 
     @GetMapping
     @CrossOrigin
+    @SecurityRequirement(name = "JWT")
     @Operation(summary = "Все возможные агентские проценты")
     public ResponseEntity<List<AgentPercentage>> getPercentageById() {
         return ResponseEntity.ok(service.getPercentages());
@@ -43,6 +46,7 @@ public class AgentPercentageController {
 
     @PutMapping
     @CrossOrigin
+    @SecurityRequirement(name = "JWT")
     @Operation(summary = "Обновление агентских процентов")
     public ResponseEntity<AgentPercentage> updatePercentage(
             @RequestBody @Parameter(description = "Сущность обновления" ) @Validated UpdateAgentPercentageDTO updateDto,
@@ -52,6 +56,7 @@ public class AgentPercentageController {
 
     @PostMapping
     @CrossOrigin
+    @SecurityRequirement(name = "JWT")
     @Operation(summary = "Создание агентских процентов")
     public ResponseEntity<AgentPercentage> createPercentage(
             @RequestBody @Parameter(description = "Сущность создания" ) @Validated CreateAgentPercentageDTO createDto) {

@@ -1,6 +1,7 @@
 package ru.dailycar.investorapp.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class BankRequisiteController {
 
     @GetMapping()
     @CrossOrigin
+    @SecurityRequirement(name = "JWT")
     @Operation(
             summary = "Банковские реквизиты по id"
     )
@@ -34,6 +36,7 @@ public class BankRequisiteController {
 
     @GetMapping("/investor")
     @CrossOrigin
+    @SecurityRequirement(name = "JWT")
     @Operation(summary = "Получение всех банковских реквизитов пользователя")
     ResponseEntity<List<BankRequisite>> getBankRequisiteByUserId(@RequestParam String userId) {
         return ResponseEntity.ok(service.getBankRequisiteByUserId(userId));
@@ -41,6 +44,7 @@ public class BankRequisiteController {
 
     @PostMapping
     @CrossOrigin
+    @SecurityRequirement(name = "JWT")
     @Operation(summary = "Создание банковских реквизитов")
     ResponseEntity<BankRequisite> createBankRequisite( @Valid @RequestBody CreateBankRequisitesDTO requisite) {
         return ResponseEntity.ok(service.createBankRequisite(requisite));
@@ -48,6 +52,7 @@ public class BankRequisiteController {
 
     @PutMapping("/{id}")
     @CrossOrigin
+    @SecurityRequirement(name = "JWT")
     @Operation(summary = "Обновление банковсих реквизитов")
     ResponseEntity<BankRequisite> updateBankRequisite(@Valid @RequestBody UpdateBankRequisiteDTO requisite, @PathVariable String id) {
         return ResponseEntity.ok(service.updateBankRequisite(requisite, id));

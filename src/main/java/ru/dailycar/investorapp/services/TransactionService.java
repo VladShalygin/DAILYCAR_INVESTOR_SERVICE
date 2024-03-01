@@ -19,4 +19,5 @@ public interface TransactionService {
     public Transaction updateTransaction(UpdateTransactionDTO createTransactionDTO, String id);
 
     public List<Transaction> getInvestmentsBeforeDate(String contractId, Long dateEnd);
+
 }

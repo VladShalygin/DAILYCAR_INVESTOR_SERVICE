@@ -1,13 +1,11 @@
 package ru.dailycar.investorapp.services.Impl;
 
-import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ru.dailycar.investorapp.dto.CreatePercentDto;
 import ru.dailycar.investorapp.dto.UpdatePercentDto;
 import ru.dailycar.investorapp.entities.Percent;
-import ru.dailycar.investorapp.entities.PercentStatus;
 import ru.dailycar.investorapp.entities.PercentType;
 import ru.dailycar.investorapp.exceptions.NotFoundException;
 import ru.dailycar.investorapp.repositories.PercentRepository;
@@ -46,15 +44,21 @@ public class PercentServiceImpl implements PercentService {
     }
 
     @Override
-    public Percent createPercent(CreatePercentDto percent, String id) {
+    public Percent createPercent(CreatePercentDto percent) {
         return repository.save(
                 Percent
                         .builder()
                         .amount(percent.getAmount())
                         .contractId(percent.getContractId())
                         .type(PercentType.valueOf(percent.getType()))
-                        .timestamp(System.currentTimeMillis())
+                        .timestamp(percent.getDate())
+                        .number((percent.getNumber()))
                         .build()
         );
+    }
+
+    @Override
+    public Percent getPercentForCalculate(int number, String contractId) {
+        return repository.findByNumberAndContractId(number, contractId);
     }
 }

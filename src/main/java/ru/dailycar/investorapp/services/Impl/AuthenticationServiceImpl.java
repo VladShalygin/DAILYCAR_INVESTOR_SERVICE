@@ -51,8 +51,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .type(InvestorType.valueOf(request.getType()))
                 .phoneNumber(normalizedPhoneNumber)
                 .email(request.getEmail().toLowerCase())
-                .referralCode(generateReferralCode())
-                .parentReferralCode(request.getParentReferralCode())
                 .locked(false)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build());
