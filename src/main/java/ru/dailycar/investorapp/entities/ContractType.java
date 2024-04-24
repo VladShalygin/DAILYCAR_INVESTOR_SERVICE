@@ -9,5 +9,7 @@ public enum ContractType {
     @Schema(description = "По договору в залоге земля")
     LAND,
     @Schema(description = "По договору в залоге земля")
-    AGENT
+    AGENT,
+    @Schema(description = "Расторжение")
+    TERMINATE
 }

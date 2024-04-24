@@ -53,6 +53,7 @@ public class PercentServiceImpl implements PercentService {
                         .type(PercentType.valueOf(percent.getType()))
                         .timestamp(percent.getDate())
                         .number((percent.getNumber()))
+                        .invitedInvestorContractId(percent.getInvitedInvestorContractId())
                         .build()
         );
     }
@@ -60,5 +61,10 @@ public class PercentServiceImpl implements PercentService {
     @Override
     public Percent getPercentForCalculate(int number, String contractId) {
         return repository.findByNumberAndContractId(number, contractId);
+    }
+
+    @Override
+    public Percent getAgentPercentForCalculate(int number, String contractId, String invitedInvestorContractId) {
+        return repository.findAgentPercent(number, contractId, invitedInvestorContractId);
     }
 }

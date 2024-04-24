@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.dailycar.investorapp.entities.DocumentPhoto;
 import ru.dailycar.investorapp.entities.DocumentPhotoStatus;
+import ru.dailycar.investorapp.entities.DocumentPhotoType;
 import ru.dailycar.investorapp.exceptions.NotFoundException;
 import ru.dailycar.investorapp.repositories.DocumentPhotoRepository;
 import ru.dailycar.investorapp.services.DocumentPhotoService;
@@ -24,7 +25,10 @@ import java.util.*;
 public class DocumentPhotoServiceImpl implements DocumentPhotoService {
 
     @Value("${DOCS_UPLOAD_DIR}")
-    private String UPLOAD_DIR;
+    private String UPLOAD_DIR_DOCS;
+
+    @Value("${CONTRACTS_UPLOAD_DIR}")
+    private String UPLOAD_DIR_CONTRACTS;
 
     private final DocumentPhotoRepository repository;
 
@@ -43,13 +47,17 @@ public class DocumentPhotoServiceImpl implements DocumentPhotoService {
         return repository.findByUserId(userId);
     }
 
+    @Override
+    public List<DocumentPhoto> getDocumentPhotosByContractId(String contractId) {
+        return repository.findByUserId(contractId);
+    }
 
     @Override
     public DocumentPhoto uploadDocumentsPhoto(MultipartFile file, @Valid @NotBlank String userId) {
 
         try {
             String filename = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-            Path filepath = Paths.get(UPLOAD_DIR, filename);
+            Path filepath = Paths.get(UPLOAD_DIR_DOCS, filename);
             Files.createDirectories(filepath.getParent());
             Files.write(filepath, file.getBytes());
 
@@ -58,6 +66,7 @@ public class DocumentPhotoServiceImpl implements DocumentPhotoService {
                     .path("/docs/" + filename)
                     .dateUpload(System.currentTimeMillis())
                     .status(DocumentPhotoStatus.NEW)
+                    .type(DocumentPhotoType.DOCUMENT)
                     .build();
 
             return repository.save(photo);
@@ -70,12 +79,12 @@ public class DocumentPhotoServiceImpl implements DocumentPhotoService {
 
     @Override
     public DocumentPhoto updateDocumentsPhoto(MultipartFile file, String id) {
-
+        //todo заменить линк перед деплоем файлы с теста на файлы проды
         try {
             DocumentPhoto existedPhoto = getDocumentPhotoById(id);
 
             String filename = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-            Path filepath = Paths.get(UPLOAD_DIR, filename);
+            Path filepath = Paths.get(UPLOAD_DIR_DOCS, filename);
             Files.createDirectories(filepath.getParent());
             Files.write(filepath, file.getBytes());
 
@@ -99,6 +108,32 @@ public class DocumentPhotoServiceImpl implements DocumentPhotoService {
         DocumentPhoto existedPhoto = getDocumentPhotoById(id);
         existedPhoto.setStatus(DocumentPhotoStatus.ACCEPTED);
         return repository.save(existedPhoto);
+    }
+
+    @Override
+    public DocumentPhoto uploadContractsPhoto(MultipartFile file, String userId, String contractId) {
+        try {
+            String filename = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+            Path filepath = Paths.get(UPLOAD_DIR_CONTRACTS, filename);
+            Files.createDirectories(filepath.getParent());
+            Files.write(filepath, file.getBytes());
+
+            DocumentPhoto photo = DocumentPhoto.builder()
+                    .userId(userId)
+                    .path("/contracts/" + filename)
+                    .dateUpload(System.currentTimeMillis())
+                    .status(DocumentPhotoStatus.NEW)
+                    .type(DocumentPhotoType.CONTRACT)
+                    .contractId(contractId)
+                    .build();
+
+            return repository.save(photo);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Ошибка сохранения файла: " + file.getOriginalFilename(), e);
+        }
     }
 
 }

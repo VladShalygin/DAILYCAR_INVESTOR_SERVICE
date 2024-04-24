@@ -3,6 +3,7 @@ package ru.dailycar.investorapp.services;
 
 import org.springframework.web.multipart.MultipartFile;
 import ru.dailycar.investorapp.dto.CreateContractDTO;
+import ru.dailycar.investorapp.dto.InvestorsNames;
 import ru.dailycar.investorapp.dto.UpdateContractDTO;
 import ru.dailycar.investorapp.entities.Contract;
 
@@ -22,6 +23,11 @@ public interface ContractService {
 
     public Contract uploadContract(MultipartFile file, String id) throws IOException;
 
-    public List<Contract> getActiveContracts();
+    public List<Contract> getActiveNonAgentContracts();
 
+    List<Contract> getContractsByAgentContractId(String contractId);
+
+    List<InvestorsNames> getInvestorsNameByParentReferralCode(String parentReferralCode, String authorizationHeader);
+
+    Contract changePledge(String contractId, String newPledgeId, String userId);
 }

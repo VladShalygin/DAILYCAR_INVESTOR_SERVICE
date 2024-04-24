@@ -29,7 +29,6 @@ public class AgentPercentageController {
     private final AgentPercentageService service;
 
     @GetMapping("/{id}")
-    @CrossOrigin
     @SecurityRequirement(name = "JWT")
     @Operation(summary = "Агентские проценты по id")
     public ResponseEntity<AgentPercentage> getPercentageById(@PathVariable @Parameter(description = "Id процента") String id) {
@@ -37,7 +36,6 @@ public class AgentPercentageController {
     };
 
     @GetMapping
-    @CrossOrigin
     @SecurityRequirement(name = "JWT")
     @Operation(summary = "Все возможные агентские проценты")
     public ResponseEntity<List<AgentPercentage>> getPercentageById() {
@@ -45,7 +43,6 @@ public class AgentPercentageController {
     };
 
     @PutMapping
-    @CrossOrigin
     @SecurityRequirement(name = "JWT")
     @Operation(summary = "Обновление агентских процентов")
     public ResponseEntity<AgentPercentage> updatePercentage(
@@ -55,7 +52,6 @@ public class AgentPercentageController {
     };
 
     @PostMapping
-    @CrossOrigin
     @SecurityRequirement(name = "JWT")
     @Operation(summary = "Создание агентских процентов")
     public ResponseEntity<AgentPercentage> createPercentage(

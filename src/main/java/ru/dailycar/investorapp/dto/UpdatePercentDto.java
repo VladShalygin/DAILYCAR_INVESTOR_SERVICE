@@ -27,4 +27,8 @@ public class UpdatePercentDto {
     @Schema(description = "Id договора, к котому относится данный процент")
     private String contractId;
 
+    @Nullable
+    @Schema(description = "Id договора приглашенного инвестора")
+    private String invitedInvestorContractId;
+
 }

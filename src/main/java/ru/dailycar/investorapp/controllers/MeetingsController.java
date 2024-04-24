@@ -26,7 +26,6 @@ public class MeetingsController {
 
     private final MeetingService service;
 
-    @CrossOrigin
     @GetMapping("/{id}")
     @Operation(summary = "Получение встречи по ее Id")
     @SecurityRequirement(name = "JWT")
@@ -34,7 +33,6 @@ public class MeetingsController {
         return ResponseEntity.ok(service.getMeetingById(id));
     }
 
-    @CrossOrigin
     @GetMapping("/investor/{id}")
     @Operation(summary = "Получение встреч c пользователем по его Id")
     @SecurityRequirement(name = "JWT")
@@ -42,7 +40,6 @@ public class MeetingsController {
         return ResponseEntity.ok(service.getUserMeeting(id));
     }
 
-    @CrossOrigin
     @GetMapping
     @Operation(summary = "Получение абсолютно всех встреч")
     @SecurityRequirement(name = "JWT")
@@ -50,7 +47,6 @@ public class MeetingsController {
         return ResponseEntity.ok(service.getMeetings());
     }
 
-    @CrossOrigin
     @PutMapping("/{id}")
     @Operation(summary = "Обновление встречи")
     @SecurityRequirement(name = "JWT")
@@ -59,7 +55,6 @@ public class MeetingsController {
         return ResponseEntity.ok(service.updateMeeting(updateDto, id));
     }
 
-    @CrossOrigin
     @PostMapping
     @Operation(summary = "Создание встречи")
     @SecurityRequirement(name = "JWT")

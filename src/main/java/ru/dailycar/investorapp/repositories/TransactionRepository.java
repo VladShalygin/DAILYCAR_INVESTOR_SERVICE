@@ -16,4 +16,7 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
 
     @Query(value = "{'type': 'INVESTMENT', 'contractId':  ?0, date: { $lte: ?1}}")
     List<Transaction> findInvestmentsBeforeDate(String contractId, Long dateEnd);
+
+    @Query(value = "{'contractId':  ?0}")
+    List<Transaction> findTransactionsByContractId(String contractId);
 }

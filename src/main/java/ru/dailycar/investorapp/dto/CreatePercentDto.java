@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 @Data
 @Builder
@@ -24,10 +25,14 @@ public class CreatePercentDto {
 
     @NotBlank
     @Schema(description = "Id договора, к котому относится данный процент")
-    private Integer number;
+    private int number;
 
     @NotBlank
     @Schema(description = "Дата расчета процента")
     private Long date;
+
+    @Nullable
+    @Schema(description = "Id договора приглашенного инвестора")
+    private String invitedInvestorContractId;
 
 }

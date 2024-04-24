@@ -21,7 +21,7 @@ public class Bid {
     private String userId;
 
     @Schema(description = "Сумма инвестиции", example = "500000")
-    private Integer amount;
+    private int amount;
 
     @Schema(description = "Статус заявки", example = "COMPLETED")
     private BidStatus status;

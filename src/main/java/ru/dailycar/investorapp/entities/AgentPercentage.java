@@ -18,9 +18,9 @@ public class AgentPercentage {
     private String name;
 
     @Schema(description = "Проценты первого уровня")
-    private Integer firstLvl;
+    private int firstLvl;
 
     @Schema(description = "Проценты второго уровня")
-    private Integer secondLvl;
+    private int secondLvl;
 
 }

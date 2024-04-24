@@ -22,7 +22,7 @@ public class UpdateBidDTO {
 
     @Nullable
     @Schema(description = "Сумма инвестиции", example = "500000")
-    private Integer amount;
+    private int amount;
 
     @Nullable
     @Schema(description = "Статус заявки", example = "CREATED")

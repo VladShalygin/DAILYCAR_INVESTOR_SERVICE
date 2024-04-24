@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.dailycar.investorapp.dto.CreateTransactionDTO;
@@ -36,10 +37,17 @@ public class TransactionController {
         return ResponseEntity.ok(service.getTransactionsByUserId(userId));
     }
 
+    @GetMapping("/contract/{contractId}")
+    @SecurityRequirement(name = "JWT")
+    @Operation(summary = "Получение всех транзакций контракта")
+    public ResponseEntity<List<Transaction>> getTransactionsByContractId(@PathVariable @Parameter(description = "ID договора") String contractId) {
+        return ResponseEntity.ok(service.getTransactionsByContractId(contractId));
+    }
+
     @PostMapping
     @SecurityRequirement(name = "JWT")
     @Operation(summary = "Создание транзакции для инвестора")
-    public ResponseEntity<Transaction> createTransaction(@RequestBody @Parameter(description = "Объект для создания транзакции") CreateTransactionDTO createTransactionDTO) {
+    public ResponseEntity<Transaction> createTransaction(@RequestBody @Parameter(description = "Объект для создания транзакции") CreateTransactionDTO createTransactionDTO) throws BadRequestException {
         return ResponseEntity.ok(service.createTransaction(createTransactionDTO));
     }
 

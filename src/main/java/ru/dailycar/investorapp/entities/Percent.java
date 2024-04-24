@@ -33,11 +33,13 @@ public class Percent {
 
     @Positive
     @Schema(description = "Дата создания этого процента")
-    private Integer number;
+    private int number;
 
     @NotBlank
     @Schema(description = "Id договора, к котому относится данный процент")
     private String contractId;
 
-
+    @Nullable
+    @Schema(description = "Id договора приглашенного инвестора")
+    private String invitedInvestorContractId;
 }

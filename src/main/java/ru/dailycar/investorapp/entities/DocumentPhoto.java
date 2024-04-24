@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.lang.Nullable;
 
 @Document
 @Data
@@ -27,5 +28,12 @@ public class DocumentPhoto {
 
     @Schema(description = "Дата загрузки", example = "1705129595000")
     private Long dateUpload;
+
+    @Schema(description = "Дата загрузки", example = "1705129595000")
+    private DocumentPhotoType type;
+
+    @Schema(description = "Дата загрузки", example = "1705129595000")
+    @Nullable
+    private String contractId;
 
 }

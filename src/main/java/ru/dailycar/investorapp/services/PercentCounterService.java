@@ -7,4 +7,7 @@ import java.util.List;
 public interface PercentCounterService {
 
     void countPercent(String contractId);
+
+    public List<Percent> predictOneMonth(String contractId);
+
 }

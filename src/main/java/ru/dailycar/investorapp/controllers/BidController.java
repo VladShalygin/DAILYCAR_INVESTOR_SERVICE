@@ -80,4 +80,13 @@ public class BidController {
         return ResponseEntity.ok(service.deleteBid(id));
     }
 
+//    @Operation(
+//            summary = "Создание заявки на изменение паспортных данных"
+//    )
+//    @SecurityRequirement(name = "JWT")
+//    @PostMapping
+//    private ResponseEntity<Bid> createBid(@RequestBody @Parameter(description = "Сущность создаваемой заявки") CreateBidDTO createBidDTO) {
+//        return ResponseEntity.ok(service.createBid(createBidDTO));
+//    }
+
 }

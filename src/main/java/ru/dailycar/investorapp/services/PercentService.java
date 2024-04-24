@@ -19,4 +19,6 @@ public interface PercentService {
     public Percent createPercent(CreatePercentDto percent);
 
     Percent getPercentForCalculate(int number, String contractId);
+
+    Percent getAgentPercentForCalculate(int number, String contractId, String invitedInvestorContractId);
 }

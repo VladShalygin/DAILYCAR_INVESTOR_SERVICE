@@ -12,6 +12,7 @@ public class CreateContractDTO {
 
     @Schema(description = "ID инвестора, которму принадлежит договор", example = "64804f7ab3afb023c6b9d397" )
     @NotBlank(message = "userId не должен быть пустым или null" )
+
     private String userId;
 
     @Schema(description = "ID предмета, который явлется залогом", example = "64804f7ab3afb023c6b9d398" )
@@ -20,13 +21,14 @@ public class CreateContractDTO {
 
     @Schema(description = "Сумма инвестиции по договору", example = "500000" )
     @Positive(message = "amount должен быть больше 0")
-    private Integer amount;
+    @Nullable
+    private int amount;
 
     @Schema(description = "Процентная ставка по договору", example = "20" )
-//    @Positive(message = "percent Должен быть больше от 1 до 100")
-//    @Max(100)
+    @Positive(message = "percent Должен быть больше от 1 до 100")
+    @Max(100)
     @Nullable
-    private Integer percent;
+    private int percent;
 
     @Schema(description = "Тип договора", example = "CAR")
     @NotNull(message = "type не должен быть null")

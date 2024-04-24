@@ -18,12 +18,8 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     @Scheduled(cron = "${scheduler.basePercent}")
     public void countBasicPercent() {
-        System.out.println("start schedule");
-        contractService.getActiveContracts().forEach(contract -> basicPercentCounter.countPercent(contract.getId()));
+        contractService.getActiveNonAgentContracts().forEach(contract -> basicPercentCounter.countPercent(contract.getId()));
     }
 
-    @Override
-    public void countAgentPercent() {
 
-    }
 }

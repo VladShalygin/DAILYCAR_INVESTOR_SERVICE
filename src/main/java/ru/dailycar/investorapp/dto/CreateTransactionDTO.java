@@ -13,7 +13,7 @@ public class CreateTransactionDTO {
 
     @Schema(description = "Сумма создаваемой инвестиции или выплаты", example = "500000")
     @Positive(message = "amount должен быть больше 0")
-    private Integer amount;
+    private int amount;
 
     @Schema(description = "ID пользователя, которму принадлежит данная транзакция", example = "64804f7ab3afb023c6b9d397")
     @NotBlank(message = "userId не должен быть пустым или null" )
@@ -27,9 +27,9 @@ public class CreateTransactionDTO {
     @NotNull(message = "type не должен быть null")
     private TransactionType type;
 
-    @Schema(description = "Id процента", example = "64804f7ab3afb023c6b9d54645")
-    @NotNull(message = "percentId не должен быть null")
-    private String percentId;
+    @Schema(description = "Id реквизитов", example = "64804f7ab3afb023c6b9d5464asd")
+    @NotNull(message = "requisiteId не должен быть null")
+    private String requisiteId;
 
 
 }

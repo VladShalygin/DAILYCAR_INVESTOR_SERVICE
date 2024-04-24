@@ -26,7 +26,7 @@ public class Transaction {
     private Long date;
 
     @Schema(description = "Сумма совершенной транзакции", example = "500000")
-    private Integer amount;
+    private int amount;
 
     @Schema(description = "Тип транзакции", example = "INVESTMENT")
     private TransactionType type;
@@ -37,4 +37,6 @@ public class Transaction {
     @Schema(description = "Id процента, привязанного к этому платежу", example = "64804f7ab3afb023c6b9d3123")
     private String percentId;
 
+    @Schema(description = "Id реквизитов по совершенной транзакции", example = "64804f7ab3afb023c6b9d3124")
+    private String requisiteId;
 }

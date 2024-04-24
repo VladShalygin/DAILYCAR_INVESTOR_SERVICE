@@ -4,5 +4,4 @@ public interface SchedulerService {
 
     void countBasicPercent();
 
-    void countAgentPercent();
 }

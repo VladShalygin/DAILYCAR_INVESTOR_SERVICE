@@ -13,4 +13,7 @@ public interface PercentRepository  extends MongoRepository<Percent, String> {
 
     @Query(value = "{'number': ?0, 'contractId': ?1}")
     Percent findByNumberAndContractId(int number, String contractId);
+
+    @Query(value = "{'number': ?0, 'contractId': ?1, 'invitedInvestorContractId': ?2}")
+    Percent findAgentPercent(int number, String contractId, String invitedInvestorContractId);
 }

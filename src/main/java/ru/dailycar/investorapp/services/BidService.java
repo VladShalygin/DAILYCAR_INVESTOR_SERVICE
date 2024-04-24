@@ -7,7 +7,7 @@ import ru.dailycar.investorapp.dto.UpdateBidDTO;
 
 import java.util.List;
 
-@Service
+
 public interface BidService {
 
     public List<Bid> getBids();

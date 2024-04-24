@@ -1,5 +1,6 @@
 package ru.dailycar.investorapp.services;
 
+import org.apache.coyote.BadRequestException;
 import ru.dailycar.investorapp.dto.CreateTransactionDTO;
 import ru.dailycar.investorapp.dto.UpdateTransactionDTO;
 import ru.dailycar.investorapp.entities.Transaction;
@@ -14,7 +15,9 @@ public interface TransactionService {
 
     List<Transaction> getInvestmentsByContractId(String contractId);
 
-    public Transaction createTransaction(CreateTransactionDTO createTransactionDTO);
+    List<Transaction> getTransactionsByContractId(String contractId);
+
+    public Transaction createTransaction(CreateTransactionDTO createTransactionDTO) throws BadRequestException;
 
     public Transaction updateTransaction(UpdateTransactionDTO createTransactionDTO, String id);
 

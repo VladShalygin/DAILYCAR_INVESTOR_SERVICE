@@ -3,12 +3,14 @@ package ru.dailycar.investorapp.entities;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.lang.Nullable;
 
 @Data
 @Document
-@Builder
+@Builder(toBuilder = true)
 @Schema(description = "Сущность договора")
 public class Contract {
 
@@ -35,9 +37,11 @@ public class Contract {
     private ContractType type;
 
     @Schema(description = "Сумма инвестиции по договору", example = "500000")
+    @Nullable
     private Integer amount;
 
     @Schema(description = "Процентная ставка по договору", example = "20")
+    @Nullable
     private Integer percent;
 
     @Schema(description = "Id процентных ставок по договору агента")
@@ -48,5 +52,11 @@ public class Contract {
 
     @Schema(description = "Id договора агента")
     private String parentContractId;
+
+    @Schema(description = "Номер контракта")
+    private String number;
+
+    @Schema(description = "Номер обременения")
+    private String encumbranceNumber;
 
 }

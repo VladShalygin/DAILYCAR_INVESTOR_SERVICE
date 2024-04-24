@@ -13,6 +13,8 @@ public interface DocumentPhotoService {
 
     public List<DocumentPhoto> getDocumentPhotosByUserId(String userId);
 
+    List<DocumentPhoto> getDocumentPhotosByContractId(String contractId);
+
     public DocumentPhoto uploadDocumentsPhoto(MultipartFile file, String userId);
 
     public DocumentPhoto updateDocumentsPhoto(MultipartFile file, String id);
@@ -21,4 +23,5 @@ public interface DocumentPhotoService {
 
     public DocumentPhoto acceptDocumentPhoto(String id);
 
+    public DocumentPhoto uploadContractsPhoto(MultipartFile file, String userId, String contractId);
 }

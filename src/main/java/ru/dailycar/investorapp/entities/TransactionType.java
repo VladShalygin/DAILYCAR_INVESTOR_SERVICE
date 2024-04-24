@@ -9,5 +9,8 @@ public enum TransactionType {
     INVESTMENT,
 
     @Schema(description = "Выплата")
-    PAYOUT
+    PAYOUT,
+
+    @Schema(description = "Выплата инвестиции")
+    INVEST_RETURN
 }

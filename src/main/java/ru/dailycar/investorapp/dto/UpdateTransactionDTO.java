@@ -11,7 +11,7 @@ public class UpdateTransactionDTO {
 
     @Schema(description = "Сумма транзакции", example = "500000")
     @Nullable
-    private Integer amount;
+    private int amount;
 
     @Schema(description = "Статус транзакции", example = "PROCESSED")
     @Nullable

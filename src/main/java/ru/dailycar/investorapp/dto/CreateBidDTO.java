@@ -15,7 +15,7 @@ public class CreateBidDTO {
 
     @Schema(description = "Сумма инвестиции или выплаты по заявке", example = "500000" )
     @PositiveOrZero(message = "amount должен быть больше или равно 0")
-    private Integer amount;
+    private int amount;
 
     @Schema(description = "Тип будущего контракта", example = "CAR")
     private String type;

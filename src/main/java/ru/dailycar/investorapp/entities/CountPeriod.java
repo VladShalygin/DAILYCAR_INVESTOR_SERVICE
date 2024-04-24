@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 @Builder
 public class CountPeriod {
-    private Integer balance;
+    private int balance;
     private Long dateStart;
     private Long dateEnd;
-    private Integer percent;
+    private int percent;
     private Long daysInYear;
     private Long daysInMonth;
 }
