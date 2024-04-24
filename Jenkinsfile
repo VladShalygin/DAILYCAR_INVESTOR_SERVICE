@@ -18,7 +18,6 @@ pipeline {
                 sh 'cp target/investor-app-0.0.1-SNAPSHOT.jar /home/autocars/api.dailycar.ru/investor-app/'
                 sh 'sudo systemctl restart investor-app'
                 sh 'sudo systemctl restart api-gateway.service'
-'
             }
         }
     }
