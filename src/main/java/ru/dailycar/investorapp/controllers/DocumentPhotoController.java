@@ -109,7 +109,6 @@ public class DocumentPhotoController {
         );
 
         HttpHeaders headers = new HttpHeaders();
-        //todo формат загружаемых файлов???
         if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) {
             headers.setContentType(MediaType.IMAGE_JPEG);
         } else if (filename.endsWith(".png")) {

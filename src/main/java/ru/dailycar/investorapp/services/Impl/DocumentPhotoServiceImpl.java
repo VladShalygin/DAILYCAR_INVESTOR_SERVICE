@@ -79,7 +79,6 @@ public class DocumentPhotoServiceImpl implements DocumentPhotoService {
 
     @Override
     public DocumentPhoto updateDocumentsPhoto(MultipartFile file, String id) {
-        //todo заменить линк перед деплоем файлы с теста на файлы проды
         try {
             DocumentPhoto existedPhoto = getDocumentPhotoById(id);
 
