@@ -104,7 +104,7 @@ public class DocumentPhotoController {
     @GetMapping("/photo")
     public ResponseEntity<Resource> getPhoto(@RequestParam String filename) throws IOException {
         Resource resource = new ClassPathResource(
-                 "resources/static/photos" + filename
+                 "./resources/static/photos" + filename
 //                servletContext.getRealPath("/") + "/investor-app/src/main/resources/static/photos"
         );
 
