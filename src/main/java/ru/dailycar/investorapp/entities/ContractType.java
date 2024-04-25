@@ -11,5 +11,12 @@ public enum ContractType {
     @Schema(description = "По договору в залоге земля")
     AGENT,
     @Schema(description = "Расторжение")
-    TERMINATE
+    TERMINATE,
+    @Schema(description = "Смена залогвого имущества")
+    CHANGE_PLEDGE,
+
+    @Schema(description = "Обновление паспорта")
+    UPDATE_PASSPORT
+
+
 }

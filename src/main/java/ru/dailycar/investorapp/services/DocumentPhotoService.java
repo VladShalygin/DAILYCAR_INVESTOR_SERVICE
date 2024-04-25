@@ -24,4 +24,6 @@ public interface DocumentPhotoService {
     public DocumentPhoto acceptDocumentPhoto(String id);
 
     public DocumentPhoto uploadContractsPhoto(MultipartFile file, String userId, String contractId);
+
+    void changeAcceptedToExpired(String userId);
 }

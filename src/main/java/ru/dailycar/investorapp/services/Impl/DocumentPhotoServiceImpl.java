@@ -135,4 +135,15 @@ public class DocumentPhotoServiceImpl implements DocumentPhotoService {
         }
     }
 
+    @Override
+    public void changeAcceptedToExpired(String userId) {
+        List<DocumentPhoto> photos = getDocumentPhotosByUserId(userId);
+        for (DocumentPhoto photo: photos){
+            if (photo.getType().equals(DocumentPhotoType.DOCUMENT) && photo.getStatus().equals(DocumentPhotoStatus.ACCEPTED)) {
+                photo.setStatus(DocumentPhotoStatus.EXPIRED);
+                repository.save(photo);
+            }
+        }
+    }
+
 }

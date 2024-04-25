@@ -80,6 +80,15 @@ public class BidController {
         return ResponseEntity.ok(service.deleteBid(id));
     }
 
+    @Operation(
+            summary = "Обновление паспортных данных"
+    )
+    @SecurityRequirement(name = "JWT")
+    @PostMapping("/updatePassport")
+    private ResponseEntity<Bid> createUpdatePassportBid(@RequestParam @Parameter(description = "ID пользователя ") String userId) {
+        return ResponseEntity.ok(service.createUpdatePassportBid(userId));
+    }
+
 //    @Operation(
 //            summary = "Создание заявки на изменение паспортных данных"
 //    )

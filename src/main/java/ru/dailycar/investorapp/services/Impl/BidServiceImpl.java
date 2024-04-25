@@ -13,6 +13,7 @@ import ru.dailycar.investorapp.entities.ContractType;
 import ru.dailycar.investorapp.exceptions.NotFoundException;
 import ru.dailycar.investorapp.repositories.BidRepository;
 import ru.dailycar.investorapp.services.BidService;
+import ru.dailycar.investorapp.services.DocumentPhotoService;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class BidServiceImpl implements BidService {
 
     private final BidRepository repository;
     private final ModelMapper mapper;
+    private final DocumentPhotoService documentPhotoService;
 
     @Override
     public List<Bid> getBids() {
@@ -41,12 +43,12 @@ public class BidServiceImpl implements BidService {
     @Override
     public Bid createBid(@Valid CreateBidDTO bidDTO) {
         Bid bid = Bid.builder()
-                    .amount(bidDTO.getAmount())
-                    .status(BidStatus.CREATED)
-                    .type(ContractType.valueOf(bidDTO.getType()))
-                    .userId(bidDTO.getUserId())
-                    .description("")
-                    .build();
+                .amount(bidDTO.getAmount())
+                .status(BidStatus.CREATED)
+                .type(ContractType.valueOf(bidDTO.getType()))
+                .userId(bidDTO.getUserId())
+                .description("")
+                .build();
         return repository.save(bid);
     }
 
@@ -62,5 +64,18 @@ public class BidServiceImpl implements BidService {
         Bid existingBid = repository.findById(id).orElseThrow(() -> new NotFoundException("Заявка не найдена"));
         existingBid.setStatus(BidStatus.DELETED);
         return repository.save(existingBid);
+    }
+
+    @Override
+    public Bid createUpdatePassportBid(String userId) {
+        documentPhotoService.changeAcceptedToExpired(userId);
+        return repository.save(Bid
+                .builder()
+                .amount(0)
+                .userId(userId)
+                .type(ContractType.UPDATE_PASSPORT)
+                .status(BidStatus.CREATED)
+                .description("Новая заявка!")
+                .build());
     }
 }

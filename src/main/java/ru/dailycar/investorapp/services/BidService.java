@@ -22,4 +22,5 @@ public interface BidService {
 
     public Bid deleteBid(String id);
 
+    Bid createUpdatePassportBid(String userId);
 }
