@@ -103,12 +103,13 @@ public class DocumentPhotoController {
 
     @GetMapping("/photo")
     public ResponseEntity<Resource> getPhoto(@RequestParam String filename) throws IOException {
-        Resource resource = new ClassPathResource(
-                 "./resources/static/photos" + filename
-//                servletContext.getRealPath("/") + "/investor-app/src/main/resources/static/photos"
-        );
+//        Resource resource = new ClassPathResource(
+//                 "resources/static/photos" + filename
+//        );
+        Resource resource = new FileSystemResource("/home/autocars/api.dailycar.ru/investor-app/resources/static/photos" + filename);
 
         HttpHeaders headers = new HttpHeaders();
+
         if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) {
             headers.setContentType(MediaType.IMAGE_JPEG);
         } else if (filename.endsWith(".png")) {
