@@ -34,8 +34,7 @@ public class BasicPercentCounterServiceImpl implements PercentCounterService {
     public void countPercent(String contractId) {
         try {
             Contract contract = contractService.getContractById(contractId);
-            System.out.println(contract);
-            if (contract == null) throw new NotFoundException("Договор не найден!");
+            if (contract == null || contract.getStatus().equals(ContractStatus.EXPIRATION)) return;
 
             Contract agentContractFirstLevel = contract.getParentContractId() != null && !contract.getParentContractId().equals("empty") ? contractService.getContractById(contract.getParentContractId()) : null;
             AgentPercentage agentPercentageFirstLevel = agentContractFirstLevel != null ? agentPercentageService.getPercentageById(agentContractFirstLevel.getAgentPercentageId()) : null;
@@ -119,9 +118,9 @@ public class BasicPercentCounterServiceImpl implements PercentCounterService {
     private List<CountPeriod> getCountPeriods(Long timestampStart, Long timestampEnd, int percent, String contractId) {
         List<CountPeriod> periods = new ArrayList<>();
 
-        LocalDateTime dateStart = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestampStart), zone).plusDays(1);
+        LocalDateTime dateStart = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestampStart), zone);
         LocalDateTime dateIteration = dateStart.plusMonths(1);
-        LocalDateTime dateEnd = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestampEnd), zone).plusDays(1);
+        LocalDateTime dateEnd = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestampEnd), zone);
 
         long daysInYear = ChronoUnit.DAYS.between(dateStart, dateStart.plusYears(1));
         System.out.println("iteration dates:");
@@ -156,11 +155,11 @@ public class BasicPercentCounterServiceImpl implements PercentCounterService {
     private Percent countPercentForPredict(long dateCreate, long dateExpiration, int percent, String contractId, PercentType type, String agentContractId) {
         System.out.println("contractId");
         System.out.println(contractId);
-        LocalDateTime dateStartContract = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateCreate), zone).plusDays(1);
-        LocalDateTime dateEndContract = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateExpiration), zone).plusDays(1);
+        LocalDateTime dateStartContract = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateCreate), zone);
+        LocalDateTime dateEndContract = LocalDateTime.ofInstant(Instant.ofEpochMilli(dateExpiration), zone);
 
         if (dateEndContract.isAfter(LocalDateTime.now(zone))) {
-            dateEndContract = LocalDateTime.now(zone).plusDays(1);
+            dateEndContract = LocalDateTime.now(zone);
         }
         System.out.println("dates: ");
         System.out.println(dateEndContract);
@@ -173,7 +172,7 @@ public class BasicPercentCounterServiceImpl implements PercentCounterService {
         System.out.println("monthDifference =");
         System.out.println(monthDifference);
         if (monthDifference < 1) {
-            timestampStartPeriod = dateStartContract.plusDays(1).toInstant(zoneOffset).toEpochMilli();
+            timestampStartPeriod = dateStartContract.toInstant(zoneOffset).toEpochMilli();
             timestampEndPeriod = dateStartContract.plusMonths(1).toInstant(zoneOffset).toEpochMilli();
             monthDifference = 1;
         } else {
@@ -214,7 +213,7 @@ public class BasicPercentCounterServiceImpl implements PercentCounterService {
         try {
             List<Contract> userContracts = contractService.getContractsByUserId(userId);
             if (userContracts == null || userContracts.isEmpty()) {
-                throw new NotFoundException("Договоры не найдены или не существуют!");
+                return new ArrayList<>();
             }
 
             List<Percent> percents = new ArrayList<Percent>();

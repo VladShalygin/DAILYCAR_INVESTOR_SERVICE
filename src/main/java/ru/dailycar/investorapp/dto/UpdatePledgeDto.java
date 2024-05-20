@@ -15,4 +15,7 @@ public class UpdatePledgeDto {
     @Nullable
     private final String number;
 
+    @Nullable
+    private final String status;
+
 }

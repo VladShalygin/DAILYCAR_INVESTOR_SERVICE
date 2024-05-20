@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.dailycar.investorapp.dto.CountActiveInvitedContractsDto;
 import ru.dailycar.investorapp.dto.CreateContractDTO;
 import ru.dailycar.investorapp.dto.InvestorsNames;
 import ru.dailycar.investorapp.dto.UpdateContractDTO;
@@ -53,6 +54,13 @@ public class ContractController {
     @Operation(summary = "Получение договорв инвестора")
     public ResponseEntity<List<Contract>> getContractsByUserId(@PathVariable @Parameter(description = "ID инвестора") String userId) {
         return ResponseEntity.ok(service.getContractsByUserId(userId));
+    }
+
+    @GetMapping("/countInvited/{contractId}")
+    @SecurityRequirement(name = "JWT")
+    @Operation(summary = "Получение количества активных приглашенных пользователей")
+    public ResponseEntity<CountActiveInvitedContractsDto> getCountActiveInvitedContracts(@PathVariable @Parameter(description = "ID договра") String contractId) {
+        return ResponseEntity.ok(service.getCountActiveInvitedContracts(contractId));
     }
 
     @PostMapping

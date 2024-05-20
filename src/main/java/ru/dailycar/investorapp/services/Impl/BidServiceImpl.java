@@ -9,6 +9,7 @@ import ru.dailycar.investorapp.dto.CreateBidDTO;
 import ru.dailycar.investorapp.entities.Bid;
 import ru.dailycar.investorapp.entities.BidStatus;
 import ru.dailycar.investorapp.dto.UpdateBidDTO;
+import ru.dailycar.investorapp.entities.BidType;
 import ru.dailycar.investorapp.entities.ContractType;
 import ru.dailycar.investorapp.exceptions.NotFoundException;
 import ru.dailycar.investorapp.repositories.BidRepository;
@@ -45,10 +46,11 @@ public class BidServiceImpl implements BidService {
         Bid bid = Bid.builder()
                 .amount(bidDTO.getAmount())
                 .status(BidStatus.CREATED)
-                .type(ContractType.valueOf(bidDTO.getType()))
+                .type(BidType.valueOf(bidDTO.getType()))
                 .userId(bidDTO.getUserId())
                 .description("")
                 .build();
+        if (bidDTO.getPledgeId() != null) bid.setPledgeId(bid.getPledgeId());
         return repository.save(bid);
     }
 
@@ -73,7 +75,7 @@ public class BidServiceImpl implements BidService {
                 .builder()
                 .amount(0)
                 .userId(userId)
-                .type(ContractType.UPDATE_PASSPORT)
+                .type(BidType.UPDATE_PASSPORT)
                 .status(BidStatus.CREATED)
                 .description("Новая заявка!")
                 .build());

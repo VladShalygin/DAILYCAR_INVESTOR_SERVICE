@@ -6,10 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.dailycar.investorapp.dto.CreateContractDTO;
-import ru.dailycar.investorapp.dto.InvestorsNames;
-import ru.dailycar.investorapp.dto.UpdateContractDTO;
-import ru.dailycar.investorapp.dto.UserIdsProjection;
+import ru.dailycar.investorapp.dto.*;
 import ru.dailycar.investorapp.entities.Contract;
 import ru.dailycar.investorapp.entities.ContractStatus;
 import ru.dailycar.investorapp.entities.PledgeHistory;
@@ -141,6 +138,18 @@ public class ContractServiceImpl implements ContractService {
                         .build());
         contract.setPledgeId(newPledgeId);
         return repository.save(contract);
+    }
+
+    @Override
+    public CountActiveInvitedContractsDto getCountActiveInvitedContracts(String contractId) {
+        Integer  count = repository.countActiveParentContract(contractId, System.currentTimeMillis());
+        System.out.println("count:");
+        System.out.println(count);
+        if (count >= 0) {
+            return CountActiveInvitedContractsDto.builder().count(count).build();
+        } else {
+            return CountActiveInvitedContractsDto.builder().count(0).build();
+        }
     }
 
     private String getContractNumber() {

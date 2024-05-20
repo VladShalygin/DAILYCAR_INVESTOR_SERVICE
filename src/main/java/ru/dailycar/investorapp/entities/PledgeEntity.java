@@ -22,4 +22,6 @@ public class PledgeEntity {
 
     private  String number;
 
+    private PledgeStatus status;
+
 }

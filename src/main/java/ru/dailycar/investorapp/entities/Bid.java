@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.lang.Nullable;
 
 @Data
 @Document
@@ -30,6 +31,12 @@ public class Bid {
     private String description;
 
     @Schema(description = "Тип будущего контракта", example = "CAR")
-    private ContractType type;
+    private BidType type;
+
+    @Nullable
+    @Schema(description = "Id заменяемого залога", example = "64804f7ab3afb023c6b9d347")
+    private String pledgeId;
+
+    private long dateUpdate;
 
 }

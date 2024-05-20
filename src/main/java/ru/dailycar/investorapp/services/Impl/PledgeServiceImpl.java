@@ -7,6 +7,7 @@ import ru.dailycar.investorapp.dto.CreatePledgeDto;
 import ru.dailycar.investorapp.dto.UpdatePledgeDto;
 import ru.dailycar.investorapp.entities.Contract;
 import ru.dailycar.investorapp.entities.PledgeEntity;
+import ru.dailycar.investorapp.entities.PledgeStatus;
 import ru.dailycar.investorapp.entities.PledgeType;
 import ru.dailycar.investorapp.exceptions.AlreadyExistsException;
 import ru.dailycar.investorapp.exceptions.NotFoundException;
@@ -61,6 +62,7 @@ public class PledgeServiceImpl implements PledgeService {
         PledgeEntity pledge = PledgeEntity.builder()
                 .type(PledgeType.valueOf(pledgeDto.getType()))
                 .sid(pledgeDto.getSid())
+                .status(PledgeStatus.AVAILABLE)
                 .build();
 
         if (pledge.getType().equals(PledgeType.CAR) && pledgeDto.getNumber() != null) {

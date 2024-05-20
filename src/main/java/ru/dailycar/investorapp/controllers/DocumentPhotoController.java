@@ -103,9 +103,7 @@ public class DocumentPhotoController {
 
     @GetMapping("/photo")
     public ResponseEntity<Resource> getPhoto(@RequestParam String filename) throws IOException {
-//        Resource resource = new ClassPathResource(
-//                 "resources/static/photos" + filename
-//        );
+        //todo Вынести фулпуть в енв
         Resource resource = new FileSystemResource("/home/autocars/api.dailycar.ru/investor-app/resources/static/photos" + filename);
 
         HttpHeaders headers = new HttpHeaders();

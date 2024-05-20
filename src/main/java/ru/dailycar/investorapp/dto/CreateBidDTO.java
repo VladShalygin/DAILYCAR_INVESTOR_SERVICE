@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 @Data
 @Schema(description = "Сущность создаваемой заявки")
@@ -19,5 +20,9 @@ public class CreateBidDTO {
 
     @Schema(description = "Тип будущего контракта", example = "CAR")
     private String type;
+
+    @Nullable
+    @Schema(description = "Id заменяемого залога", example = "64804f7ab3afb023c6b9d347")
+    private String pledgeId;
 
 }
